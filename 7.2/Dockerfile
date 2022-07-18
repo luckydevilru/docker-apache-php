@@ -1,7 +1,7 @@
 FROM ubuntu:bionic
-MAINTAINER romeOz <serggalka@gmail.com>
+MAINTAINER SirGray <prokh.sergey@gmail.com>
 
-ENV OS_LOCALE="en_US.UTF-8"
+ENV OS_LOCALE=ru_RU.UTF-8"
 RUN apt-get update && apt-get install -y locales && locale-gen ${OS_LOCALE}
 ENV LANG=${OS_LOCALE} \
     LANGUAGE=${OS_LOCALE} \
@@ -12,7 +12,7 @@ ENV APACHE_CONF_DIR=/etc/apache2 \
     PHP_CONF_DIR=/etc/php/7.2 \
     PHP_DATA_DIR=/var/lib/php
 
-COPY ./app /var/www/app/
+COPY ./app /home/bitrix/www/
 COPY entrypoint.sh /sbin/entrypoint.sh
 
 RUN	\
@@ -43,7 +43,7 @@ COPY ./configs/apache2.conf ${APACHE_CONF_DIR}/apache2.conf
 COPY ./configs/app.conf ${APACHE_CONF_DIR}/sites-enabled/app.conf
 COPY ./configs/php.ini  ${PHP_CONF_DIR}/apache2/conf.d/custom.ini
 
-WORKDIR /var/www/app/
+WORKDIR /home/bitrix/www/
 
 EXPOSE 80 443
 
